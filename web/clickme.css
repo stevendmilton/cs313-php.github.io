@@ -1,0 +1,18 @@
+body {
+    font-size: 2rem;
+    display: block;
+}
+
+#div1 {
+    border: 2px solid red;
+}
+#div2 {
+    border: 2px solid pink;
+    background-color: grey;
+}
+#div3 {
+    border: 2px solid blue;
+    background-color: yellowgreen;
+}
+
+#div1:hover, #div2:hover, #div3:hover {font-weight: 900;}

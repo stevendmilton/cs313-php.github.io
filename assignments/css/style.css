@@ -1,0 +1,42 @@
+
+body { 
+    background-image: url('../images/golf-course-1403981053jvl.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    padding-bottom: 0;
+}
+
+h2 {
+    color: brown;
+}
+main p {
+    margin: auto;
+    width: 50%;
+    text-align: left;
+    padding-bottom: 5px;
+    color: blue;
+}
+li {
+    list-style-type: none;
+}
+
+a:hover {
+    color: red;
+}
+
+a:visited {
+    color: purple;
+}
+
+input:hover {
+    color: orangered;
+}
+
