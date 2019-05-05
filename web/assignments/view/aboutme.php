@@ -10,7 +10,7 @@
 <body id="ambody">
     <header>
         <h1>About Me</h1>
-        <img src="../images/family.png" alt="Steven Milton's family">
+        <img src="images/family.png" alt="Steven Milton's family">
     </header>
     <main id="ammain">
         <form action="index.php" method="get">

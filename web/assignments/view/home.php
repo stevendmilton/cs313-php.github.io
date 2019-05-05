@@ -13,7 +13,7 @@
     <header>
         <h1>Steven Milton</h1>
         <h2>CS 313 Assignment Page</h2>
-        <img src="../images/me_again.png" alt="Steven Milton's Photo">
+        <img src="images/me_again.png" alt="Steven Milton's Photo">
         <form action="index.php" method="get">
             <input type="submit" name="aboutme" value="About Me"/>
             <input type="hidden" name="action" value="aboutme">
