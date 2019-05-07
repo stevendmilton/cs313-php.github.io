@@ -4,8 +4,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="Teach03" content="width=device-width, initial-scale=1">
-    <title>CS313 Jonathan Carlson</title>
-    <meta name = "description" content="CS313 Assignments for Jonathan Carlson.">
+    <title>CS313 Team 1</title>
+    <meta name = "description" content="CS313 Assignments - Team 1">
     <link rel="stylesheet" href="normalize.css">
     <link id="styles" rel="stylesheet" href="teach03.css">
   </head>
