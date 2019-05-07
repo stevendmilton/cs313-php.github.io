@@ -27,21 +27,21 @@
       <?php
       echo "<p>Major</p>";
 
-      $majors = array("Computer Science", "Web Design and Development", "Computer information Systems", "Computer Engineering");
+      $majors = array("CS" => "Computer Science", "WDD" => "Web Design and Development", "CIS" => "Computer Information Systems", "CE" => "Computer Engineering");
 
-      foreach($majors as $i)
-        echo "<input type='radio' name='major' value='$i'> $i <br>";
+      foreach($majors as $key => $value)
+        echo "<input type='radio' name='major' value='$value'> $value <br>";
 
       echo "<p>Comments</p><textarea name='comments'></textarea><br>";
 
       //Continental checkbox options
       echo "<p>Places you have visited:</p>";
 
-      $places = array("North America", "South America", "Europe", "Asia", "Austrialia", "Africa", "Antarctica");
+      $places = array("NA" => "North America", "SA" => "South America", "EU" => "Europe", "AS" => "Asia", "AU" => "Austrialia", "AF" => "Africa", "AN" => "Antarctica");
 
       // In order to have this work, your name must include "[]" at the end!
-      foreach($places as $i) {
-        echo "<input type='checkbox' name='Continent[]' value='$i'> $i <br>";
+      foreach($places as $key => $value) {
+        echo "<input type='checkbox' name='Continent[]' value='$value'> $value <br>";
       }
       ?>
 
