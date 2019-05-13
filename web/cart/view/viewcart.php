@@ -11,29 +11,24 @@
 
  <body>
     <header>
-        <h1>Steven Milton</h1>
-        <h2>CS 313 Assignment Page</h2>
-        <img src="images/me_again.png" alt="Steven Milton's Photo">
-        <form action="index.php" method="get">
-            <input type="submit" name="aboutme" value="About Me"/>
-            <input type="hidden" name="action" value="aboutme">
-        </form> 
+        <h1>Milton's Office Emporium</h1>
+        <h2>Only The Best!</h2>
+        <?php 
+        if (isset($_SESSION['cart'])) {
+            $cart = $_SESSION['cart'];
+        } else {
+            for ($row=0; $row < 10;$row++) {
+                $cart[$row][0] = $row;
+                $cart[$row][1] = 0;
+                $cart[$row][2] = "";
+            }
+        } ?>
     </header>
     <main> 
-        <h2>Assignments</h2>
-        <ul>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-            <li><a href="#">Coming Soon!</a></li>
-        </ul>
+        <h2>Shopping Cart</h2>
+        <form action="index.php" method="post">
+            <?php echo $prodlist ?>
+        </form>
     </main>
     <footer>
         <p>&copy; <?php echo date("Y"); ?> &#9733; Steven D. Milton &#9733; Florida &#9733; <a href="http://www.byui.edu/online">BYU-Idaho Online Learning</a></p>

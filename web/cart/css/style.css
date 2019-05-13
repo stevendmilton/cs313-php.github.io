@@ -1,16 +1,6 @@
 
-body { 
-    background-image: url('../images/golf-course-1403981053jvl.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    width: 100%;
-    text-align: center;
-}
-
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     padding-bottom: 0;
 }
 
@@ -40,3 +30,21 @@ input:hover {
     color: orangered;
 }
 
+main form {
+    display: inline-block;
+    text-align: left;
+}
+
+table {
+    background-color: burlywood;
+    border: 2px solid black;
+}
+
+form .button1 {
+    background-color: #de2226;
+    color: white;
+    font-size: 2vw;
+    padding: 12px;
+  }
+
+td {padding: 5px;}
