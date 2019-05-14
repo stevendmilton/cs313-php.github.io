@@ -23,6 +23,39 @@ if (isset($_SESSION['cart'])) {
 } else {
     for ($row=0; $row < 10;$row++) {
         $cart[$row][0] = $row;
+        switch ($row) {
+            case "0":
+                $cart[$row][2] = "Stapler";
+                break;
+            case "1":
+                $cart[$row][2] = "Printer";
+                break;
+            case "2":
+                $cart[$row][2] = "Tape Dispenser";
+                break;
+            case "3":
+                $cart[$row][2] = "Scotch Tape";
+                break;            
+            case "4":
+                $cart[$row][2] = "Printer Ink";
+                break;            
+            case "5":
+                $cart[$row][2] = "Ream of Paper";
+                break;            
+            case "6":
+                $cart[$row][2] = "Pack of Pens";
+                break;            
+            case "7":
+                $cart[$row][2] = "Markers";
+                break;            
+            case "8":
+                $cart[$row][2] = "Push Pins";
+                break;            
+            case "9":
+                $cart[$row][2] = "Erasers";
+                break;            
+        }
+        case 
         $cart[$row][1] = 0;
     }
 }
@@ -37,6 +70,7 @@ switch ($action){
         include "view/checkout.php";
         break;
     case 'viewcart':
+        $prodlist = buildProductsTable($cart);
         include "view/viewcart.php";
         break;
     case 'confirmation':
@@ -85,7 +119,10 @@ switch ($action){
             $cart[9][1] += $qty9;
         }
         $_SESSION['cart'] = $cart;
-        
+        break;
+    case 'del':
+        $row = 
+        $cart[]
     default:
         include 'view/browse.php';
 }

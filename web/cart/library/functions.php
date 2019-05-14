@@ -10,9 +10,9 @@ function buildProductsTable($cart) {
     $prodList .= '<tbody>';
     for ($row=0;$row<10;row++) {
         if ($item[$row][1]>0){
-        $prodList .= "<tr class='tblRow'><td>$cart[$row][2]</td>";
-        $prodList .= "<tr class='tblRow'><td>$cart[$row][1]</td>";
-        $prodList .= "<td><a href='index.php?action=del&id=$cart[$row][0]' title='Click to delete'>Delete</a></td></tr>";
+            $prodList .= "<tr class='tblRow'><td>$cart[$row][2]</td>";
+            $prodList .= "<tr class='tblRow'><td>$cart[$row][1]</td>";
+            $prodList .= "<td><a href='index.php?action=del&id=$cart[$row][0]' title='Click to delete'>Delete</a></td></tr>";
         }
     }
     $prodList .= '</tbody></table>';
