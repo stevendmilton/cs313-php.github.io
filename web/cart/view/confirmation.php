@@ -9,36 +9,19 @@
 <head>
 <body id="ambody">
     <header>
-        <h1>Browse Items</h1>
+        <h1>Order Confirmation</h1>
     </header>
-    <main id="ammain">
-        <table>
-            <thead>
-                <tr class="tblTitle"><th>Product Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>
-            </thead>
-            <tbody>
-                <tr class='tblRow'>
-                    <td>$product[invName]</td>
-                    <td><a href='/acme/products?action=mod&id=$product[invId]' title='Click to modify'>Modify</a></td>
-                    <td><a href='/acme/products?action=del&id=$product[invId]' title='Click to delete'>Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
-        <form action="index.php" method="get">
-            <input type="submit" name="home" value="Home"/>
-            <input type="hidden" name="action" value="home">
-        </form> 
-        <h2>Who I Am</h2>
-        <p>I am currently a student at BYUI.  As you can see, I enjoy 
-        golf and love living in Boynton Beach, Florida where I can 
-        golf all year round if I choose. I decided to go back to school
-        after being let go from my last job. I chose to go into 
-        web development as I am enamored with the internet in general
-        and wanted to understand more about working with it.</p>
-        <p>I married when I was 44 to my wife with three children.  
-        Our children now have all left the nest and my wife and I 
-        are enjoying the grandchild.  We hope to serve missions as a 
-        couple when we both retire.</p>
+    <main id="confitem">
+        <h3>Items Ordered</h3>
+        <?php echo $conflist;?>
+        <hr>
+        <h3 id="shipto">Ship To:</h3>
+        <div id="container">
+            <p class="confirm"><?php echo $_SESSION['clientFirstname'] . ' ' . $_SESSION['clientLastname'];?></p>
+            <p class="confirm"><?php echo $_SESSION['clientStreet'];?></p>
+            <p class="confirm"><?php echo $_SESSION['clientCity'] . ', ' . $_SESSION['clientState'] . ' ' . $_SESSION['clientZip'];?></p>
+            <p class="confirm"><?php echo $_SESSION['clientEmail'];?></p>
+        </div>
     </main>
     <footer>
         <p>&copy; <?php echo date("Y"); ?> &#9733; Steven D. Milton &#9733; Florida &#9733; <a href="http://www.byui.edu/online">BYU-Idaho Online Learning</a></p>

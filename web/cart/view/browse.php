@@ -25,57 +25,64 @@
                     <td>Stapler</td>
                     <td><input type="number" name='qty0' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][0][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty0">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Printer</td>
                     <td><input type="number" name='qty1' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][1][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty1">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Tape Dispenser</td>
                     <td><input type="number" name='qty2' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][2][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty2">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Scotch Tape</td>
                     <td><input type="number" name='qty3' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][3][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty3">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Printer Ink</td>
                     <td><input type="number" name='qty4' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][4][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty4">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Ream of Paper</td>
                     <td><input type="number" name='qty5' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][5][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty5">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Pack of Pens</td>
                     <td><input type="number" name='qty6' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][6][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty6">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Markers</td>
                     <td><input type="number" name='qty7' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][7][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty7">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Push Pins</td>
                     <td><input type="number" name='qty8' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][8][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty8">Add to Order</button></td>
                 </tr>
                 <tr>
                     <td>Erasers</td>
                     <td><input type="number" name='qty9' min = 0 max = 9999></td>
                     <td><?php echo $_SESSION['cart'][9][1]; ?></td>
+                    <td><button type="submit" name='action' value="qty9">Add to Order</button></td>
                 </tr>
             </table>
-            <input type="submit" name="submit" class="button1" value="Add to Order"/>
-            <input type="hidden" name="action" value="addcart">
-            <input type="submit" name="viewcart" class="button2" value="View Cart"/>
-            <input type="hidden" name="action" value="viewcart">
+            <button type="submit" name='action' value="viewcart">View Cart</button>
         </form> 
     </main>
     <footer>

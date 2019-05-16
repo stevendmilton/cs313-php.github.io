@@ -25,9 +25,11 @@
         } ?>
     </header>
     <main> 
-        <h2>Shopping Cart</h2>
+        <h3>Shopping Cart</h3>
         <form action="index.php" method="post">
             <?php echo $prodlist ?>
+            <button type="submit" name='action' value="browse">Return to Shopping</button>
+            <button type="submit" name='action' value="checkout">Check Out</button>
         </form>
     </main>
     <footer>
