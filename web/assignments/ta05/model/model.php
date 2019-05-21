@@ -3,7 +3,7 @@
 
  function getScriptures() {
     // Create a connection object from the main connection function
-    $db = dbConnect();
+    $db = acmeConnect();
     // The SQL statement to be used with the database
     $sql = 'SELECT book,chapter,verse,content FROM scriptures order by book,chapter,verse';
     // The next line creates the prepared statement using the acme connection
@@ -22,7 +22,7 @@
 
  function findScriptures($sqlbook) {
     // Create a connection object from the main connection function
-    $db = dbConnect();
+    $db = acmeConnect();
     // The SQL statement to be used with the database
     $sql = 'SELECT id,book,chapter,verse,content FROM scriptures where book=:sqlbook order by chapter,verse';
     // The next line creates the prepared statement using the acme connection
@@ -43,7 +43,7 @@
 
  function GetScriptureById($sqlid) {
     // Create a connection object from the main connection function
-    $db = dbConnect();
+    $db = acmeConnect();
     // The SQL statement to be used with the database
     $sql = 'SELECT content FROM scriptures where id=:sqlid';
     // The next line creates the prepared statement using the acme connection
