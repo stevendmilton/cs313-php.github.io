@@ -14,9 +14,11 @@
         <h1>Scripture Resources</h1>
     </header>
     <main> 
+        <h2>List All Scriptures</h2>
         <form action="index.php" method="post">
             <?php echo $results ?>
             <button type="submit" name='action' value="list">Display Scriptures</button>
+            <button type="submit" name='action' value="find">Find Scriptures</button>
         </form>
     </main>
     <footer>
