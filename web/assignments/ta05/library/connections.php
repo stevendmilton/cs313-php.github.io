@@ -6,6 +6,7 @@
 
 
 function dbConnect(){
+  $db = NULL;
   try
   {
     $dbUrl = getenv('DATABASE_URL');
@@ -27,6 +28,7 @@ function dbConnect(){
     echo 'Error!: ' . $ex->getMessage();
     die();
   }
+  return $db;
 }
 
 
