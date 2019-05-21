@@ -25,11 +25,11 @@ switch ($action){
         include "view/list.php";
         break;
     case 'find':
-        var_dump('Find');
-        $searchscript = filter_input(INPUT_POST, 'searchscript', FILTER_SANITIZE_STRING);
-        var_dump($searchscript);
-        $scriptures = findScriptures($searchscript);
-        $results = buildScriptureRefs($scriptures);
+        //var_dump('Find');
+        //$searchscript = filter_input(INPUT_POST, 'searchscript', FILTER_SANITIZE_STRING);
+        //var_dump($searchscript);
+        //$scriptures = findScriptures($searchscript);
+        //$results = buildScriptureRefs($scriptures);
         include 'view/find.php';
         break;
     case 'detail':
