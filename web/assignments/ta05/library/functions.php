@@ -23,7 +23,8 @@ function buildScriptureRefs($list) {
 }
 
 function DisplayContent($content) {
-    $slist = '<table><tbody>';
+
+    $slist = '<table><th>' . $row['book'] . ' ' . $row['chapter'] . ':' . $row['verse'] . '</th><tbody>';
     foreach ($content as $row) {
         $slist .= "<tr class='tblRow'><td>" . $row['content'] . "</td>";
     }

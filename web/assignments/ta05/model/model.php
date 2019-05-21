@@ -45,7 +45,7 @@
     // Create a connection object from the main connection function
     $db = dbConnect();
     // The SQL statement to be used with the database
-    $sql = 'SELECT content FROM scriptures where id=:sqlid';
+    $sql = 'SELECT book,chapter,verse,content FROM scriptures where id=:sqlid';
     // The next line creates the prepared statement using the acme connection
     $stmt = $db->prepare($sql);
     // Replace the variable with the actual value in the select statement
