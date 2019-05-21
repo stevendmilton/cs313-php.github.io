@@ -20,7 +20,8 @@ if ($action == NULL){
 
 switch ($action){
     case 'list':
-        $results = buildScripturesTable(getScriptures());
+        $scriptures = getScriptures();
+        $results = buildScripturesTable($scriptures);
         include "view/list.php";
         break;
     default:

@@ -8,7 +8,6 @@ function dbConnect(){
   try
   {
     $dbUrl = getenv('DATABASE_URL');
-    var_dump($dbUrl);
 
     $dbOpts = parse_url($dbUrl);
 
