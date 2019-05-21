@@ -18,7 +18,7 @@
         <form action="index.php" method="post">
             <?php echo $results ?>
             <button type="submit" name='action' value="list">Display Scriptures</button>
-            <button type="submit" name='action' value="find">Find Scriptures</button>
+            <button type="submit" name='action' value="search">Find Scriptures</button>
         </form>
     </main>
     <footer>
