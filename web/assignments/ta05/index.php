@@ -21,6 +21,7 @@ if ($action == NULL){
 switch ($action){
     case 'list':
         $scriptures = getScriptures();
+        var_dump($scriptures);
         $results = buildScripturesTable($scriptures);
         include "view/list.php";
         break;
