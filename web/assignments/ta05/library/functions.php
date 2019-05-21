@@ -23,12 +23,13 @@ function buildScriptureRefs($list) {
 }
 
 function DisplayContent($content) {
-    var_dump($content);
-    $slist = '<table><th>' . $content['book'] . ' ' . $content['chapter'] . ':' . $content['verse'] . '</th><tbody>';
+    
     foreach ($content as $row) {
+        $slist = '<table><th>' . $row['book'] . ' ' . $row['chapter'] . ':' . $row['verse'] . '</th><tbody>';
         $slist .= "<tr class='tblRow'><td>" . $row['content'] . "</td>";
+        $slist .= '</tbody></table>';
     }
-    $slist .= '</tbody></table>';
+
     return $slist;
 }
 ?>
