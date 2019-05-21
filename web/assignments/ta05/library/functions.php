@@ -13,7 +13,6 @@ function buildScripturesTable($list) {
 }
 
 function buildScriptureRefs($list) {
-    var_dump($list);
     $slist = '<table><tbody>';
     foreach ($list as $row) {
         $slist .= "<tr class='tblRow'><td><a href='index.php?action=detail&id=" . $row['id'];
