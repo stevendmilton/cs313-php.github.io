@@ -54,18 +54,29 @@ switch ($action){
     case 'addauthor':
         $authorName = filter_input(INPUT_POST, 'authorName', FILTER_SANITIZE_STRING);
         if(!empty($authorName)) {
-        $insOutcome = insertAuthor($authorName);
-            if($insOutcome === 1){
-                $_SESSION['message'] = "$authorName has successfully been added";        
+            print 'here1';
+            $results = getAuthor($authorName);
+            if(!empty($results)) {
+                print 'here2';
+                $_SESSION['message']="Author " . $authorName . " already exists.";
+                header('location: index.php?action=authors');
             } else {
-                $_SESSION['message'] = "$authorName could not be added.  Please try again.";
-            }
+                print 'here3';
+                $insOutcome = insertAuthor($authorName);
+                if($insOutcome === 1){
+                    print 'here4';
+                    $_SESSION['message'] = "$authorName has successfully been added";        
+                } else {
+                    print 'here5';
+                    $_SESSION['message'] = "$authorName could not be added.  Please try again.";
+                }
+            }   
         } else {
             $_SESSION['message'] = 'Please provide author name.';
             header('location: index.php?action=authors');
             exit; 
         }
-        include 'view/authors.php';
+        //include 'view/authors.php';
         break;
     case 'deleteauthor':
         $authorId = filter_input(INPUT_POST, 'authorId', FILTER_SANITIZE_INT);
@@ -86,22 +97,26 @@ switch ($action){
     case 'addbook':
         $bookTitle = filter_input(INPUT_POST, 'bookTitle', FILTER_SANITIZE_STRING);
         $bookDesc = filter_input(INPUT_POST, 'bookDesc', FILTER_SANITIZE_STRING);
-        $author = filter_input(INPUT_POST,'bookAuthor', FILTER_SANITIZE_STRING);
-        if(empty($bookTitle) || empty($bookDesc) || empty($author)){
+        $bookAuthor = filter_input(INPUT_POST,'bookAuthor', FILTER_SANITIZE_STRING);
+        if(empty($bookTitle) || empty($bookDesc) || empty($bookAuthor)){
             $_SESSION['message'] = 'Please provide information for all empty form fields.';
             header('location: index.php?action=books');
             exit; 
         } else {
-            $results = findAuthor($author);
-            if(empty($results)){
+            $authorId = getAuthor($bookAuthor);
+            if(empty($authorId)){
                 $_SESSION['message'] = "Author " . $author . " does not exist.  Create and try again.";
                 header('location: index.php?action=books');
-            } else {
-                $results = getAuthor($author);
-                $authorid = $results['authorid'];
-            }
+                exit;
+            } 
+            $results = getAuthorTitle($bookAuthor,$bookTitle);
+            if(!empty($results)){
+                $_SESSION['message'] = "Title " . $bookTitle . " already exists.";
+                header('location: index.php?action=books');
+                exit;
+            } 
         }
-        $insOutcome = insertBook($bookTitle,$bookDesc,$authorId);
+        $insOutcome = insertBook($bookTitle,$bookDesc,$authorid);
         if($insOutcome === 1){
             $_SESSION['message'] = "$bookTitle has successfully been added";        
         } else {
