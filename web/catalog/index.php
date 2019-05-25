@@ -54,20 +54,15 @@ switch ($action){
     case 'addauthor':
         $authorName = filter_input(INPUT_POST, 'authorName', FILTER_SANITIZE_STRING);
         if(!empty($authorName)) {
-            print 'here1';
             $results = getAuthor($authorName);
             if(!empty($results)) {
-                print 'here2';
                 $_SESSION['message']="Author " . $authorName . " already exists.";
                 header('location: index.php?action=authors');
             } else {
-                print 'here3';
                 $insOutcome = insertAuthor($authorName);
                 if($insOutcome === 1){
-                    print 'here4';
                     $_SESSION['message'] = "$authorName has successfully been added";        
                 } else {
-                    print 'here5';
                     $_SESSION['message'] = "$authorName could not be added.  Please try again.";
                 }
             }   
