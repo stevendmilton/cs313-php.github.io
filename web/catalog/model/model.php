@@ -108,6 +108,7 @@ function listAuthors() {
    $stmt->closeCursor();
    // The next line sends the array of data back to where the function
    // was called (this should be the controller)
+   var_dump($results);
    return $results;
 }
 
