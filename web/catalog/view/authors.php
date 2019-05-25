@@ -14,7 +14,7 @@
                 <h1>Library Resources</h1>  
             </header>
             <nav>
-                <?php include $_SERVER['DOCUMENT_ROOT']."/web/catalog/common/nav.php";?>
+                <?php include "common/nav.php";?>
             </nav>
            <main>
                 <h2>Author Maintenance</h2>
