@@ -31,7 +31,11 @@
             <input type="text" name="srcAuthor" id="srcAuthor"><br>
             <button type="submit" name='action' value="find">Search</button>
         </form>
-        <?php echo $results; ?>
+        <?php 
+            if (isset($results)){
+                echo $results; 
+            }
+        ?>
     </main>
     <footer>
         <?php include "common/footer.php";?>  
