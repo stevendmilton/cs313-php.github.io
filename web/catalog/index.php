@@ -91,7 +91,7 @@ switch ($action){
         $authorId = filter_input(INPUT_POST,'bookAuthor', FILTER_SANITIZE_STRING);
         var_dump($bookTitle);
         var_dump($bookDesc);
-        var_dump(authorId);
+        var_dump($authorId);
        /* if(empty($bookTitle) || empty($bookDesc) || empty($authorId)){
             $_SESSION['message'] = 'Please provide information for all empty form fields.';
             header('location: index.php?action=books');
