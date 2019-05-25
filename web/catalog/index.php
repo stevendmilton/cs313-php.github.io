@@ -86,11 +86,9 @@ switch ($action){
         include 'view/books.php';
         break;
     case 'addbook':
-    var_dump('BookAuthor:'.bookAuthor);
         $bookTitle = filter_input(INPUT_POST, 'bookTitle', FILTER_SANITIZE_STRING);
         $bookDesc = filter_input(INPUT_POST, 'bookDesc', FILTER_SANITIZE_STRING);
         $authorId = filter_input(INPUT_POST,'bookAuthor', FILTER_SANITIZE_STRING);
-        var_dump($bookDesc);
         if(empty($bookTitle) || empty($bookDesc) || empty($authorId)){
             $_SESSION['message'] = 'Please provide information for all empty form fields.';
             header('location: index.php?action=books');
