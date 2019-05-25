@@ -34,7 +34,7 @@
                         </li>
                         <li>
                             <label for="bookAuthor" class="invlabel">Author</label>
-                            <?php echo $authorList; ?>
+                            <input type="text" id="bookAuthor" name="bookAuthor" <?php if(isset($bookAuthor)){echo "value='$bookAuthor'";}  ?> required>
                         </li>
                         <li>
                             <label for="bookDesc" class="invlabel">Description</label>
