@@ -98,12 +98,16 @@ switch ($action){
             header('location: index.php?action=books');
             exit; 
         } else {
-            $authorId = getAuthor($bookAuthor);
-            if(empty($authorId)){
-                $_SESSION['message'] = "Author " . $author . " does not exist.  Create and try again.";
+            $results = getAuthor($bookAuthor);
+            if(count($results) < 1){
+                $_SESSION['message'] = "Author " . $bookAuthor . " does not exist.  Create and try again.";
                 header('location: index.php?action=books');
                 exit;
-            } 
+            } else {
+                foreach ($results as $result) {
+                    $authorId = $result['authorid'];
+                }
+            }
             $results = getAuthorTitle($bookAuthor,$bookTitle);
             if(!empty($results)){
                 $_SESSION['message'] = "Title " . $bookTitle . " already exists.";
@@ -111,7 +115,7 @@ switch ($action){
                 exit;
             } 
         }
-        $insOutcome = insertBook($bookTitle,$bookDesc,$authorid);
+        $insOutcome = insertBook($bookTitle,$bookDesc,$authorId);
         if($insOutcome === 1){
             $_SESSION['message'] = "$bookTitle has successfully been added";        
         } else {
