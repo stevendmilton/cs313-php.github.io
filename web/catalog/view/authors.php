@@ -24,7 +24,7 @@
                     unset($_SESSION['message']);
                 }
                 ?>
-                <form id="authorentry" method="post" action="/web/catalog/index.php">
+                <form id="authorentry" method="post" action="index.php">
                     <legend>Enter Author Information</legend>
                     <ol>
                         <li>
@@ -37,7 +37,7 @@
                 </form>
             </main>
             <footer>
-                <?php include $_SERVER['DOCUMENT_ROOT']."/web/catalog/common/footer.php";?>  
+                <?php include "common/footer.php";?>
             </footer>
         </div>
     </body>

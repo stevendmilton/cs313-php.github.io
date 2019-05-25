@@ -34,7 +34,7 @@
         <?php echo $results; ?>
     </main>
     <footer>
-        <?php include $_SERVER['DOCUMENT_ROOT']."/web/catalog/common/footer.php";?>  
+        <?php include "common/footer.php";?>  
     </footer>
  </body>
 </html>
