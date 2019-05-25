@@ -5,7 +5,7 @@
 */
 
 
-function dbConnect(){
+function abConnect(){
   $db = NULL;
   try
   {
@@ -32,7 +32,7 @@ function dbConnect(){
 }
 
 
-function acmeConnect(){
+function dbConnect(){
   if (stripos($_SERVER["HTTP_HOST"], "localhost") === 0
       || stripos($_SERVER["HTTP_HOST"], "127.0.0.1") === 0) {
     // Running on local server

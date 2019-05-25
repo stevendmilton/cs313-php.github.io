@@ -31,9 +31,7 @@ switch ($action){
         $author = filter_input(INPUT_POST, 'srcAuthor', FILTER_SANITIZE_STRING);
         $title = filter_input(INPUT_POST, 'srcTitle', FILTER_SANITIZE_STRING);
         if(empty($author) && empty($title)){
-            $_SESSION['message'] = 'Must include one search field';
-            include '../view/main.php';
-            exit; 
+            $searchresults = listAllBooks();
         }
         if(!empty($author) && !empty($title)) {
             $searchresults = findAuthorTitle($author,$title);
@@ -88,18 +86,19 @@ switch ($action){
     case 'addbook':
         $bookTitle = filter_input(INPUT_POST, 'bookTitle', FILTER_SANITIZE_STRING);
         $bookDesc = filter_input(INPUT_POST, 'bookDesc', FILTER_SANITIZE_STRING);
-        $authorId = filter_input(INPUT_POST,'bookAuthor', FILTER_SANITIZE_STRING);
-        if(empty($bookTitle) || empty($bookDesc) || empty($authorId)){
+        $author = filter_input(INPUT_POST,'bookAuthor', FILTER_SANITIZE_STRING);
+        if(empty($bookTitle) || empty($bookDesc) || empty($author)){
             $_SESSION['message'] = 'Please provide information for all empty form fields.';
             header('location: index.php?action=books');
             exit; 
         } else {
-            if(!empty$authorId) {
-                $results = findAuthor($authorId);
-                if(empty($results)){
-                    $_SESSION['message'] = "Author " . $authorId . " does not exist.  Create and try again.";
-                    header('location: index.php?action=books')
-                }
+            $results = findAuthor($author);
+            if(empty($results)){
+                $_SESSION['message'] = "Author " . $author . " does not exist.  Create and try again.";
+                header('location: index.php?action=books');
+            } else {
+                $results = getAuthor($author);
+                $authorid = $results['authorid'];
             }
         }
         $insOutcome = insertBook($bookTitle,$bookDesc,$authorId);
