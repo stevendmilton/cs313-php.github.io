@@ -88,7 +88,7 @@ switch ($action){
     case 'addbook':
         $bookTitle = filter_input(INPUT_POST, 'bookTitle', FILTER_SANITIZE_STRING);
         $bookDesc = filter_input(INPUT_POST, 'bookDesc', FILTER_SANITIZE_STRING);
-        $authorId = filter_input(INPUT_POST,'bookAuthor');
+        $authorId = filter_input(INPUT_POST,'bookAuthor', FILTER_SANITIZE_STRING);
         var_dump($bookTitle);
         var_dump($bookDesc);
         var_dump($authorId);
