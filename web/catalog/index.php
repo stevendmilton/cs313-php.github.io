@@ -81,21 +81,26 @@ switch ($action){
         include 'view/authors.php';
         break;
     case 'books':
-        $authors = listAuthors();
-        $authorList = buildAuthorDropDown($authors);
+        //$authors = listAuthors();
+        //$authorList = buildAuthorDropDown($authors);
         include 'view/books.php';
         break;
     case 'addbook':
         $bookTitle = filter_input(INPUT_POST, 'bookTitle', FILTER_SANITIZE_STRING);
         $bookDesc = filter_input(INPUT_POST, 'bookDesc', FILTER_SANITIZE_STRING);
         $authorId = filter_input(INPUT_POST,'bookAuthor', FILTER_SANITIZE_STRING);
-        var_dump($bookTitle);
-        var_dump($bookDesc);
-        var_dump($authorId);
-        /*if(empty($bookTitle) || empty($bookDesc) || empty($authorId)){
+        if(empty($bookTitle) || empty($bookDesc) || empty($authorId)){
             $_SESSION['message'] = 'Please provide information for all empty form fields.';
             header('location: index.php?action=books');
             exit; 
+        } else {
+            if(!empty$authorId) {
+                $results = findAuthor($authorId);
+                if(empty($results)){
+                    $_SESSION['message'] = "Author " . $authorId . " does not exist.  Create and try again.";
+                    header('location: index.php?action=books')
+                }
+            }
         }
         $insOutcome = insertBook($bookTitle,$bookDesc,$authorId);
         if($insOutcome === 1){
