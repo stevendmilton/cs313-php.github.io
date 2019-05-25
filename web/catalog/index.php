@@ -107,7 +107,7 @@ switch ($action){
             $_SESSION['message'] = "$bookTitle has successfully been added";        
         } else {
             $_SESSION['message'] = "$bookTitle could not be added.  Please try again.";
-        }*/
+        }
         include 'view/books.php';
         break;
     case 'deletebook':
