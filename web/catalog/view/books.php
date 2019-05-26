@@ -38,7 +38,7 @@
                         </li>
                         <li>
                             <label for="bookDesc" class="invlabel">Description</label>
-                            <textarea> id="bookDesc" name="bookDesc" rows = "4" cols = "80" required> <?php if(isset($bookDesc)){echo $bookDesc;}?></textarea>
+                            <textarea id="bookDesc" name="bookDesc" rows = "4" cols = "80" required> <?php if(isset($bookDesc)){echo $bookDesc;}?></textarea>
                         </li>
                     </ol>
                     <input type="submit" name="submit" class="registerbtn" value="Add Book">
