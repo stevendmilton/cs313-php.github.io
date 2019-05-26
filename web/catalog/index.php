@@ -71,7 +71,7 @@ switch ($action){
             header('location: index.php?action=authors');
             exit; 
         }
-        //include 'view/authors.php';
+        include 'view/authors.php';
         break;
     case 'deleteauthor':
         $authorId = filter_input(INPUT_POST, 'authorId', FILTER_SANITIZE_INT);
