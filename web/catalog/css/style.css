@@ -75,9 +75,9 @@ nav ul {
 .registerbtn, .regbtn {
     background-color: violet;
     color: black;
-    font-size: 2vw;
-    padding: 12px;
-    margin-top: 3vw;
+    font-size: 2em;
+    padding: 5px;
+    margin-top: 1.5em;
   }
 
   form legend {

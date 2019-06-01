@@ -34,12 +34,12 @@ switch ($action){
             $searchresults = listAllBooks();
         }
         if(!empty($author) && !empty($title)) {
-            $searchresults = findAuthorTitle($author,$title);
+            $searchresults = getBooksByAuthorTitle($author,$title);
         } else {
             if(!empty($author)){
-                $searchresults = findAuthor($author);
+                $searchresults = getBooksByAuthor($author);
             } else {
-                $searchresults = findTitle($title);
+                $searchresults = getBooksByTitle($title);
             }
         }
         $results = buildResultsTable($searchresults);
@@ -51,17 +51,24 @@ switch ($action){
     case 'authors':
         include 'view/authors.php';
         break;
+    case 'listauthors':
+        $authorList = listAuthors();
+        $results = buildAuthorTable($authorList);
+        include 'view/authors.php';
+        break;
     case 'addauthor':
         $authorName = filter_input(INPUT_POST, 'authorName', FILTER_SANITIZE_STRING);
         if(!empty($authorName)) {
             $results = getAuthor($authorName);
-            if(!empty($results)) {
+            if(count($results) > 0) {
                 $_SESSION['message']="Author " . $authorName . " already exists.";
                 header('location: index.php?action=authors');
+                exit;
             } else {
                 $insOutcome = insertAuthor($authorName);
                 if($insOutcome === 1){
-                    $_SESSION['message'] = "$authorName has successfully been added";        
+                    $_SESSION['message'] = "$authorName has successfully been added";    
+                    unset($results);    
                 } else {
                     $_SESSION['message'] = "$authorName could not be added.  Please try again.";
                 }
@@ -73,14 +80,35 @@ switch ($action){
         }
         include 'view/authors.php';
         break;
-    case 'deleteauthor':
-        $authorId = filter_input(INPUT_POST, 'authorId', FILTER_SANITIZE_INT);
+    case 'delauthor':
+        $authorId = filter_input(INPUT_POST, 'authorId');
         $authorName = filter_input(INPUT_POST, 'authorName', FILTER_SANITIZE_STRING);
-        $delOutcome = deleteAuthor($authorId);
-        if($delOutcome === 1){
-            $_SESSION['message'] = "$authorName has successfully been deleted";        
+        if(!empty($authorName)) {
+            $results = getAuthor($authorName);
+            if(count($results) < 1 ) {
+                $_SESSION['message']="Author " . $authorName . " does not exist.";
+                header('location: index.php?action=authors');
+                exit;
+            } else {
+                $authorId = $results[0]['authorId'];
+                $results = findBooksByAuthorId($authorId);
+                if(count($results)>0){
+                    $_SESSION['message'] = "Books by $authorName exist.  Remove all books for this author and try again.";
+                    header('location: index.php?action=authors');
+                    exit;
+                }
+                $delOutcome = deleteAuthor($authorId);
+                if($delOutcome === 1){
+                    $_SESSION['message'] = "$authorName has successfully been deleted";    
+                    unset($results);    
+                } else {
+                    $_SESSION['message'] = "$authorName could not be deleted.  Please try again.";
+                }
+            }   
         } else {
-            $_SESSION['message'] = "$authorName could not be deleted.  Please try again.";
+            $_SESSION['message'] = 'Please provide author name.';
+            header('location: index.php?action=authors');
+            exit; 
         }
         include 'view/authors.php';
         break;
@@ -105,7 +133,7 @@ switch ($action){
                 exit;
             } else {
                 foreach ($results as $result) {
-                    $authorId = $result['authorid'];
+                    $authorId = $result[0]['authorid'];
                 }
             }
             $results = getAuthorTitle($bookAuthor,$bookTitle);
@@ -123,14 +151,59 @@ switch ($action){
         }
         include 'view/books.php';
         break;
-    case 'deletebook':
-        $bookId = filter_input(INPUT_POST, 'bookId', FILTER_SANITIZE_INT);
-        $bookName = filter_input(INPUT_POST, 'bookName', FILTER_SANITIZE_STRING);
-        $delOutcome = deletebook($bookId);
-        if($delOutcome === 1){
-            $_SESSION['message'] = "$bookName has successfully been deleted";        
+    case 'updbook':
+        $bookAuthor = filter_input(INPUT_POST, 'bookAuthor', FILTER_SANITIZE_STRING);
+        $bookTitle = filter_input(INPUT_POST, 'bookTitle', FILTER_SANITIZE_STRING);
+        $bookDesc = filter_input(INPUT_POST, 'bookDesc', FILTER_SANITIZE_STRING);
+        $found = getExactTitle($bookTitle);
+        if(count($found) < 1) {
+            $_SESSION['message'] = "$bookTitle was not found.  Please re-enter title or add book.";
+            header("location: view/books.php");
+            exit;
         } else {
-            $_SESSION['message'] = "$bookName could not be deleted.  Please try again.";
+            $bookId = $found[0]['bookId'];
+            if(empty($bookAuthor)) {
+                $authorId = $found[0]['authorId'];
+            } else {
+                $foundAuthor = getAuthor($bookAuthor);
+                if(count($foundAuthor) < 1) {
+                    $_SESSION['message'] = "$bookAuthor was not found.  Please re-enter or add author.";
+                    header("location: index.php?action=books");
+                    exit;
+                } else {
+                    $authorId = $foundAuthor[0]['authorId'];
+                }
+            }
+            if(empty($bookDesc)) {
+                $bookDesc = $found[0]['description'];
+            }
+            date_default_timezone_set('America/New_York');
+            $modDate = date('Y-m-d');
+            $updOutcome = updateBookInfo($bookId,$authorId,$bookDesc,$modDate);
+            var_dump($updOutcome);
+            if($updOutcome === 1) {
+                $_SESSION['message'] = "$bookTitle was updated successfully";
+            } else {
+                $_SESSION['message'] = "$bookTitle was not updated.  Please try again.";
+            }
+
+        }
+        include 'view/books.php';
+        break;
+    case 'delbook':
+        $bookAuthor = filter_input(INPUT_POST, 'bookAuthor', FILTER_SANITIZE_STRING);
+        $bookTitle = filter_input(INPUT_POST, 'bookTitle', FILTER_SANITIZE_STRING);
+        $found = returnBookId($bookAuthor,$bookTitle);
+        if(count($found) < 1) {
+            $_SESSION['message'] = "$bookTitle/$bookAuthor was not found.  Please re-enter your entries.";
+            header("location: view/books.php");
+            exit;
+        }
+        $delOutcome = deletebook($found[0]['bookId']);
+        if($delOutcome === 1){
+            $_SESSION['message'] = "$bookTitle has successfully been deleted";        
+        } else {
+            $_SESSION['message'] = "$bookTitle could not be deleted.  Please try again.";
         }
         include 'view/books.php';
         break;

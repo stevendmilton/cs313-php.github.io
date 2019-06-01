@@ -30,19 +30,20 @@
                     <ol>
                         <li>
                             <label for="bookTitle" class="invlabel" >Title</label>
-                            <input type="text" id="bookTitle" name="bookTitle" <?php if(isset($bookTitle)){echo "value='$bookTitle'";}  ?> required>
+                            <input type="text" id="bookTitle" name="bookTitle" <?php if(isset($bookTitle)){echo "value='$bookTitle'";}  ?>>
                         </li>
                         <li>
                             <label for="bookAuthor" class="invlabel">Author</label>
-                            <input type="text" id="bookAuthor" name="bookAuthor" <?php if(isset($bookAuthor)){echo "value='$bookAuthor'";}  ?> required>
+                            <input type="text" id="bookAuthor" name="bookAuthor" <?php if(isset($bookAuthor)){echo "value='$bookAuthor'";}  ?>>
                         </li>
                         <li>
                             <label for="bookDesc" class="invlabel">Description</label>
-                            <textarea id="bookDesc" name="bookDesc" rows = "4" cols = "80" required> <?php if(isset($bookDesc)){echo $bookDesc;}?></textarea>
+                            <textarea id="bookDesc" name="bookDesc" rows = "4" cols = "40"><?php if(isset($bookDesc)){echo $bookDesc;}?></textarea>
                         </li>
                     </ol>
-                    <input type="submit" name="submit" class="registerbtn" value="Add Book">
-                    <input type="hidden" name="action" value="addbook">
+                    <button type="submit" name="action" class="registerbtn" value="addbook">Add Book</button>
+                    <button type="submit" name="action" class="registerbtn" value="updbook">Modify Information</button>
+                    <button type="submit" name="action" class="registerbtn" value="delbook">Delete Book</button>
                 </form>
             </main>
             <footer>

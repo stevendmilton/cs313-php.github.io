@@ -21,29 +21,53 @@ function listAllBooks() {
    return $results;
 }
    
-function findAuthorTitle($author,$title) {
-    // Create a connection object from the main connection function
-    $db = dbConnect();
-    // The SQL statement to be used with the database
-    $sql = 'SELECT title,name,description FROM books,authors where ';
-    $sql .= 'books.authorId=authors.authorId and title like ? and name like ? order by title';
-    // The next line creates the prepared statement using the acme connection
-    $stmt = $db->prepare($sql);
-    // Replace the variable with the actual value in the select statement
-    $params = array("%$title%","%$author%");
-    // The next line runs the prepared statement
-    $stmt->execute($params);
-    // The next line gets the data from the database and 
-    // stores it as an array in the $products variable
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // The next line closes the interaction with the database
-    $stmt->closeCursor();
-    // The next line sends the array of data back to where the function
-    // was called (this should be the controller)
-    return $results;
+
+function returnBookId($author,$title) {
+   // Create a connection object from the main connection function
+   $db = dbConnect();
+   // The SQL statement to be used with the database
+   $sql = 'SELECT bookId FROM books,authors where ';
+   $sql .= 'books.authorId=authors.authorId and title like ? and name like ? order by title';
+   // The next line creates the prepared statement using the acme connection
+   $stmt = $db->prepare($sql);
+   // Replace the variable with the actual value in the select statement
+   $params = array("%$title%","%$author%");
+   // The next line runs the prepared statement
+   $stmt->execute($params);
+   // The next line gets the data from the database and 
+   // stores it as an array in the $products variable
+   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   // The next line closes the interaction with the database
+   $stmt->closeCursor();
+   // The next line sends the array of data back to where the function
+   // was called (this should be the controller)
+   return $results;
 }
 
-function findAuthor($author) {
+function getBooksByAuthorTitle($author,$title) {
+   // Create a connection object from the main connection function
+   $db = dbConnect();
+   // The SQL statement to be used with the database
+   $sql = 'SELECT bookId,title,name,description FROM books,authors where ';
+   $sql .= 'books.authorId=authors.authorId and title = ? and name = ? order by title';
+   // The next line creates the prepared statement using the acme connection
+   $stmt = $db->prepare($sql);
+   // Replace the variable with the actual value in the select statement
+   $params = array("%$title%","%$author%");
+   // The next line runs the prepared statement
+   $stmt->execute($params);
+   // The next line gets the data from the database and 
+   // stores it as an array in the $products variable
+   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   // The next line closes the interaction with the database
+   $stmt->closeCursor();
+   // The next line sends the array of data back to where the function
+   // was called (this should be the controller)
+   return $results;
+}
+
+function getBooksByAuthor($author) {
+   // Find all books for an author by author name
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
@@ -65,11 +89,32 @@ function findAuthor($author) {
    return $results;
 }
 
+function findBooksByAuthorId($authorId){
+   // Create a connection object from the main connection function
+   $db = dbConnect();
+   // The SQL statement to be used with the database
+   $sql = 'SELECT authorId FROM books where authorId = :authorId';
+   // The next line creates the prepared statement using the acme connection
+   $stmt = $db->prepare($sql);
+   // Replace the variable with the actual value in the select statement
+   $stmt->bindValue(':authorId', $authorId, PDO::PARAM_INT);
+   // The next line runs the prepared statement
+   $stmt->execute();
+   // The next line gets the data from the database and 
+   // stores it as an array in the $products variable
+   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   // The next line closes the interaction with the database
+   $stmt->closeCursor();
+   // The next line sends the array of data back to where the function
+   // was called (this should be the controller)
+   return $results;
+}
+
 function getAuthor($author) {
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
-   $sql = 'SELECT authorid,name FROM authors where name = :author';
+   $sql = 'SELECT authorId,name FROM authors where name = :author';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
@@ -127,7 +172,7 @@ function listAuthors() {
    return $results;
 }
 
-function findTitle($title) {
+function getBooksByTitle($title) {
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
@@ -138,6 +183,27 @@ function findTitle($title) {
    $stmt = $db->prepare($sql);
    // The next line runs the prepared statement
    $stmt->execute($params);
+   // The next line gets the data from the database and 
+   // stores it as an array in the $products variable
+   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   // The next line closes the interaction with the database
+   $stmt->closeCursor();
+   // The next line sends the array of data back to where the function
+   // was called (this should be the controller)
+   return $results;
+}
+
+function getExactTitle($title) {
+   // Create a connection object from the main connection function
+   $db = dbConnect();
+   // The SQL statement to be used with the database
+   $sql = 'SELECT bookId,title,name,description,books.authorId FROM books,authors where ';
+   $sql .= 'books.authorId=authors.authorId and title = :title';
+   // The next line creates the prepared statement using the acme connection
+   $stmt = $db->prepare($sql);
+   $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+   // The next line runs the prepared statement
+   $stmt->execute();
    // The next line gets the data from the database and 
    // stores it as an array in the $products variable
    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -221,6 +287,31 @@ function insertUser($userName,$userDisplayName,$userPassword) {
    // Insert the data
    $stmt->execute();
    // Ask how many rows changed as a result of our insert
+   $rowsChanged = $stmt->rowCount();
+   // Close the database interaction
+   $stmt->closeCursor();
+   // Return the indication of success (rows changed)
+   return $rowsChanged;
+}
+
+function updateBookInfo($bookId,$authorId,$desc,$modDate) {
+   // Create a connection object using the acme connection function
+   $db = dbConnect();
+   // The SQL statement
+   $sql = 'update books set authorId = :authorId, description = :desc,';
+   $sql .= 'dateModified = :modDate where bookId = :bookId';
+   // Create the prepared statement using the acme connection
+   $stmt = $db->prepare($sql);
+   // The next four lines replace the placeholders in the SQL
+   // statement with the actual values in the variables
+   // and tells the database the type of data it is
+   $stmt->bindValue(':authorId', $authorId, PDO::PARAM_INT);
+   $stmt->bindValue(':bookId', $bookId, PDO::PARAM_INT);
+   $stmt->bindValue(':desc', $desc, PDO::PARAM_STR);
+   $stmt->bindValue(':modDate', $modDate);
+   // Delete the data
+   $stmt->execute();
+   // Ask how many rows changed as a result of our delete
    $rowsChanged = $stmt->rowCount();
    // Close the database interaction
    $stmt->closeCursor();

@@ -29,7 +29,7 @@
             <input type="text" name="srcTitle" id="srcTitle"><br>
             <label for="srcAuthor">Author&#9;</label>
             <input type="text" name="srcAuthor" id="srcAuthor"><br>
-            <button type="submit" name='action' value="find">Search</button>
+            <button type="submit" name='action' class='registerbtn' value="find">Search</button>
         </form>
         <?php 
             if (isset($results)){
