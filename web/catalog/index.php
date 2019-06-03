@@ -94,9 +94,6 @@ switch ($action){
                 if(empty($authorId)){
                     $authorId = $results['authorid'];
                 }
-                var_dump($results);
-                print "authorId:";
-                var_dump($authorId);
                 $results = findBooksByAuthorId($authorId);
                 if(count($results)>0){
                     $_SESSION['message'] = "Books by $authorName exist.  Remove all books for this author and try again.";
