@@ -132,9 +132,7 @@ switch ($action){
                 header('location: index.php?action=books');
                 exit;
             } else {
-                foreach ($results as $result) {
-                    $authorId = $result[0]['authorid'];
-                }
+                $authorId = $results[0]['authorid'];
             }
             $results = getAuthorTitle($bookAuthor,$bookTitle);
             if(!empty($results)){

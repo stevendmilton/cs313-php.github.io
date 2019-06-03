@@ -48,8 +48,8 @@ function getBooksByAuthorTitle($author,$title) {
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
-   $sql = 'SELECT bookId,title,name,description FROM books,authors where ';
-   $sql .= 'books.authorId=authors.authorId and title = ? and name = ? order by title';
+   $sql = 'SELECT bookId,title,name,description FROM books as a inner join authors as b ';
+   $sql .= 'on a.authorId=b.authorId where title like ? and name like ? order by title';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
