@@ -90,9 +90,9 @@ switch ($action){
                 header('location: index.php?action=authors');
                 exit;
             } else {
-                $authorId = $results[0]['authorId'];
+                $authorId = $results[0]['authorid'];
                 if(empty($authorId)){
-                    $authorId = $results['authorId'];
+                    $authorId = $results['authorid'];
                 }
                 var_dump($results);
                 print "authorId:";
