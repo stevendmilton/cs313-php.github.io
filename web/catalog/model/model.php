@@ -298,7 +298,7 @@ function updateBookInfo($bookId,$authorId,$desc,$modDate) {
    // Create a connection object using the acme connection function
    $db = dbConnect();
    // The SQL statement
-   $sql = 'update books set authorid = :authorid, description = :desc,';
+   $sql = 'update books set authorid = :authorId, description = :desc,';
    $sql .= 'datemodified = :modDate where bookid = :bookId';
    // Create the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
