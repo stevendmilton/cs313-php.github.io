@@ -181,7 +181,6 @@ switch ($action){
             date_default_timezone_set('America/New_York');
             $modDate = date('Y-m-d');
             $updOutcome = updateBookInfo($bookId,$authorId,$bookDesc,$modDate);
-            var_dump($updOutcome);
             if($updOutcome === 1) {
                 $_SESSION['message'] = "$bookTitle was updated successfully";
             } else {
