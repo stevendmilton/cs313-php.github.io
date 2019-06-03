@@ -162,9 +162,9 @@ switch ($action){
             header("location: view/books.php");
             exit;
         } else {
-            $bookId = $found[0]['bookId'];
+            $bookId = $found[0]['bookid'];
             if(empty($bookAuthor)) {
-                $authorId = $found[0]['authorId'];
+                $authorId = $found[0]['authorid'];
             } else {
                 $foundAuthor = getAuthor($bookAuthor);
                 if(count($foundAuthor) < 1) {
@@ -200,7 +200,7 @@ switch ($action){
             header("location: view/books.php");
             exit;
         }
-        $delOutcome = deletebook($found[0]['bookId']);
+        $delOutcome = deletebook($found[0]['bookid']);
         if($delOutcome === 1){
             $_SESSION['message'] = "$bookTitle has successfully been deleted";        
         } else {
