@@ -6,7 +6,7 @@ function listAllBooks() {
    $db = dbConnect();
    // The SQL statement to be used with the database
    $sql = 'SELECT title,name,description FROM books,authors where ';
-   $sql .= 'books.authorId=authors.authorId order by title';
+   $sql .= 'books.authorid=authors.authorid order by title';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // The next line runs the prepared statement
@@ -27,7 +27,7 @@ function returnBookId($author,$title) {
    $db = dbConnect();
    // The SQL statement to be used with the database
    $sql = 'SELECT bookId FROM books,authors where ';
-   $sql .= 'books.authorId=authors.authorId and title like ? and name like ? order by title';
+   $sql .= 'books.authorid=authors.authorid and title like ? and name like ? order by title';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
@@ -49,7 +49,7 @@ function getBooksByAuthorTitle($author,$title) {
    $db = dbConnect();
    // The SQL statement to be used with the database
    $sql = 'SELECT bookId,title,name,description FROM books as a inner join authors as b ';
-   $sql .= 'on a.authorId=b.authorId where title like ? and name like ? order by title';
+   $sql .= 'on a.authorid=b.authorid where title like ? and name like ? order by title';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
@@ -72,7 +72,7 @@ function getBooksByAuthor($author) {
    $db = dbConnect();
    // The SQL statement to be used with the database
    $sql = 'SELECT title,name,description FROM books,authors where ';
-   $sql .= 'books.authorId=authors.authorId and name like ? order by title';
+   $sql .= 'books.authorid=authors.authorid and name like ? order by title';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
@@ -93,7 +93,7 @@ function findBooksByAuthorId($authorId){
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
-   $sql = 'SELECT authorId FROM books where authorId = :authorId';
+   $sql = 'SELECT authorid FROM books where authorid = :authorId';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
@@ -114,7 +114,7 @@ function getAuthor($author) {
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
-   $sql = 'SELECT authorId,name FROM authors where name = :author';
+   $sql = 'SELECT authorid,name FROM authors where name = :author';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
@@ -157,7 +157,7 @@ function listAuthors() {
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
-   $sql = 'SELECT authorId,name FROM authors order by name';
+   $sql = 'SELECT authorid,name FROM authors order by name';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // The next line runs the prepared statement
@@ -177,7 +177,7 @@ function getBooksByTitle($title) {
    $db = dbConnect();
    // The SQL statement to be used with the database
    $sql = 'SELECT title,name,description FROM books,authors where ';
-   $sql .= 'books.authorId=authors.authorId and title like ? order by title';
+   $sql .= 'books.authorid=authors.authorid and title like ? order by title';
    $params = array("%$title%");
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
@@ -197,8 +197,8 @@ function getExactTitle($title) {
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
-   $sql = 'SELECT bookId,title,name,description,books.authorId FROM books,authors where ';
-   $sql .= 'books.authorId=authors.authorId and title = :title';
+   $sql = 'SELECT bookid,title,name,description,books.authorid FROM books,authors where ';
+   $sql .= 'books.authorid=authors.authorid and title = :title';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    $stmt->bindValue(':title', $title, PDO::PARAM_STR);
@@ -219,8 +219,8 @@ function insertBook($title,$desc,$authorId) {
     $db = dbConnect();
     // The SQL statement
     $comments = ' ';
-    $sql = 'INSERT INTO books (authorId, title, description, dateAdded, dateModified)
-        VALUES (:authorId,:title,:desc,:dateAdded,:dateModified)';
+    $sql = 'INSERT INTO books (authorid, title, description, dateadded, datemodified)
+        VALUES (:authorid,:title,:desc,:dateAdded,:dateModified)';
     // Create the prepared statement using the acme connection
     $stmt = $db->prepare($sql);
     // The next four lines replace the placeholders in the SQL
@@ -246,7 +246,7 @@ function insertAuthor($authorName) {
    $db = dbConnect();
    // The SQL statement
    $comments = ' ';
-   $sql = 'INSERT INTO authors (name, dateAdded, dateModified)
+   $sql = 'INSERT INTO authors (name, dateadded, datemodified)
        VALUES (:authorName,:dateAdded,:dateModified)';
    // Create the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
@@ -298,8 +298,8 @@ function updateBookInfo($bookId,$authorId,$desc,$modDate) {
    // Create a connection object using the acme connection function
    $db = dbConnect();
    // The SQL statement
-   $sql = 'update books set authorId = :authorId, description = :desc,';
-   $sql .= 'dateModified = :modDate where bookId = :bookId';
+   $sql = 'update books set authorid = :authorid, description = :desc,';
+   $sql .= 'datemodified = :modDate where bookid = :bookId';
    // Create the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // The next four lines replace the placeholders in the SQL
@@ -323,7 +323,7 @@ function deleteAuthor($authorId) {
    // Create a connection object using the acme connection function
    $db = dbConnect();
    // The SQL statement
-   $sql = 'delete from authors where authorId = :authorId';
+   $sql = 'delete from authors where authorid = :authorId';
    // Create the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // The next four lines replace the placeholders in the SQL
@@ -344,7 +344,7 @@ function deleteUser($userId) {
    // Create a connection object using the acme connection function
    $db = dbConnect();
    // The SQL statement
-   $sql = 'delete from users where userId = :userId';
+   $sql = 'delete from users where userid = :userId';
    // Create the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // The next four lines replace the placeholders in the SQL
@@ -365,7 +365,7 @@ function deleteBook($bookId) {
    // Create a connection object using the acme connection function
    $db = dbConnect();
    // The SQL statement
-   $sql = 'delete from books where bookId = :bookId';
+   $sql = 'delete from books where bookid = :bookId';
    // Create the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // The next four lines replace the placeholders in the SQL
