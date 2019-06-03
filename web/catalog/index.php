@@ -92,7 +92,7 @@ switch ($action){
             } else {
                 $authorId = $results[0]['authorId'];
                 if(empty($authorId)){
-                    $authorId = $result['authorId'];
+                    $authorId = $results['authorId'];
                 }
                 print "authorId:";
                 var_dump($authorId);
