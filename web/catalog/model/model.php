@@ -220,7 +220,7 @@ function insertBook($title,$desc,$authorId) {
     // The SQL statement
     $comments = ' ';
     $sql = 'INSERT INTO books (authorid, title, description, dateadded, datemodified)
-        VALUES (:authorid,:title,:desc,:dateAdded,:dateModified)';
+        VALUES (:authorId,:title,:desc,:dateAdded,:dateModified)';
     // Create the prepared statement using the acme connection
     $stmt = $db->prepare($sql);
     // The next four lines replace the placeholders in the SQL
