@@ -94,6 +94,7 @@ switch ($action){
                 if(empty($authorId)){
                     $authorId = $results['authorId'];
                 }
+                var_dump($results);
                 print "authorId:";
                 var_dump($authorId);
                 $results = findBooksByAuthorId($authorId);
