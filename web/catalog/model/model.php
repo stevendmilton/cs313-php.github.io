@@ -26,14 +26,15 @@ function returnBookId($author,$title) {
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
-   $sql = 'SELECT bookId FROM books,authors where ';
-   $sql .= 'books.authorid=authors.authorid and title like ? and name like ? order by title';
+   $sql = 'SELECT bookId FROM books where ';
+   $sql .= 'title = :title  and authorid = :author';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
-   $params = array("%$title%","%$author%");
+   $stmt->bindValue(":author",$author);
+   $stmt->bindValue(":title",$title);
    // The next line runs the prepared statement
-   $stmt->execute($params);
+   $stmt->execute();
    // The next line gets the data from the database and 
    // stores it as an array in the $products variable
    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -135,11 +136,11 @@ function getAuthorTitle($author,$title) {
    // Create a connection object from the main connection function
    $db = dbConnect();
    // The SQL statement to be used with the database
-   $sql = 'SELECT books.title FROM books,authors where authors.name = :author and books.title = :title';
+   $sql = 'SELECT books.title FROM books,authors where authors.authorid = :author and books.title = :title';
    // The next line creates the prepared statement using the acme connection
    $stmt = $db->prepare($sql);
    // Replace the variable with the actual value in the select statement
-   $stmt->bindValue(':author', $author, PDO::PARAM_STR);
+   $stmt->bindValue(':author', $author, PDO::PARAM_INT);
    $stmt->bindValue(':title', $title, PDO::PARAM_STR);
    // The next line runs the prepared statement
    $stmt->execute();

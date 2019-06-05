@@ -29,7 +29,7 @@ function buildAuthorTable($list) {
 }
 
 function buildAuthorDropDown($list) {
-    $slist = '<select id = "bookAuthor" required><option value="" disabled selected>Select Author</option>';
+    $slist = '<select name="bookAuthor" required><option value="" disabled selected>Select Author</option>';
     foreach ($list as $row) {
         $slist .= "<option value = '" . $row['authorid'];
         $slist .= "'>" . $row['name'] . "</option>";
