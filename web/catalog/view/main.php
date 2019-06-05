@@ -26,7 +26,7 @@
             }
         ?>
         <form action="index.php" method="post">
-            <legend>Enter Search Criteria (partial matches allowed)</legend>
+            <legend>Enter Search Criteria (partial matches allowed/case sensitive)</legend>
             <ol>
                 <li>
                     <label for="srcTitle">Title:</label>
