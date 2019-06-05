@@ -3,24 +3,28 @@
 //common functions
 
 function buildResultsTable($list) {
-    $slist = '<table><th>Author</th><th>Title</th><th>Description</th><tbody>';
+    $slist = '<div id="atable"><div id="atable-scroll"><table><thead><tr>';
+    $slist .= '<th><span class="thtext">Author</span></th>';
+    $slist .= '<th><span class="thtext">Title</span></th>';
+    $slist .= '<th><span class="thtext">Description</span></th>';
+    $slist .= '</tr></thead><tbody>';
     foreach ($list as $row) {
         $slist .= "<tr class='tblRow'>";
         $slist .= "<td>" . $row['name'] . "</td>";
         $slist .= "<td>" . $row['title'] . "</td>";
-        $slist .= "<td>" . $row['description'] . "</td>";
+        $slist .= "<td>" . $row['description'] . "</td></tr>";
     }
-    $slist .= '</tbody></table>';
+    $slist .= '</tbody></table></div></div>';
     return $slist;
 }
 
 function buildAuthorTable($list) {
-    $slist = '<table><th>Author</th><tbody>';
+    $slist = '<div id="atable"><div id="atable-scroll"><table><thead><tr><th>';
+    $slist .= '<span class="thtext">Author</span></th></tr></thead><tbody>';
     foreach ($list as $row) {
-        $slist .= "<tr class='tblRow'>";
-        $slist .= "<td>" . $row['name'] . "</td>";
+        $slist .= "<tr><td>" . $row['name'] . "</td></tr>";
     }
-    $slist .= '</tbody></table>';
+    $slist .= '</tbody></table></div></div>';
     return $slist;
 }
 

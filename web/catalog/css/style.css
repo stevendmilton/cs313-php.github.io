@@ -1,3 +1,4 @@
+* {box-sizing: border-box};
 
 h1 {
     font-size: 2rem;
@@ -12,23 +13,31 @@ li {
     list-style-type: none;
 }
 
+a {
+    text-decoration: none;
+}
+
 a:hover {
     color: red;
+    text-decoration: underline;
 }
 
 a:visited {
     color: purple;
 }
 
+input {margin-bottom: 5px;}
+
 input:hover {
     color: orangered;
 }
 
-body {
+#mainContent {
     border: 5px solid black;
-    width: 600px;
+    width: 90%;
     padding: 10px;
     border-radius: 10px;
+    background: rgb(191, 222, 235);
 }
 
 main form {
@@ -37,8 +46,32 @@ main form {
 }
 
 table {
-    background-color: burlywood;
+    background-color: black;
     border: 2px solid black;
+}
+
+#atable {
+    position:relative;
+}
+#atable-scroll {
+    height:150px;
+    overflow:auto;  
+    margin-top:20px;
+}
+#atable table {
+    width:100%;
+}
+#atable table * {
+    background:burlywood;
+    color:black;
+}
+#atable table thead th .text {
+    position:absolute;   
+    top:-20px;
+    z-index:2;
+    height:20px;
+    width:35%;
+    border:1px solid red;
 }
 
 form .button1 {
@@ -65,8 +98,9 @@ main div p {
 
 nav ul {
     display: inline-block;
-    border: 3px solid black;
+    border: 2px solid black;
     padding-right: 10px;
+    background: yellow;
 }
 
 #registration {
@@ -100,7 +134,7 @@ nav ul {
   }
 
   .results {
-      color: red;
+      color: rgba(195, 0, 255, 0.452);
       font-size: 1.5vw;
   }
 

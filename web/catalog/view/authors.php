@@ -26,21 +26,18 @@
                 ?>
                 <form id="authorentry" method="post" action="index.php">
                     <legend>Enter Author Information</legend>
-                    <?php 
-                        if(isset($results)){
-                            echo $results; 
-                         } 
-                    ?>
                     <ol>
                         <li>
                             <label for="authorName" class="invlabel" >Author name</label>
                             <input type="text" id="authorName" name="authorName" <?php if(isset($authorName)){echo "value='$authorName'";}  ?>>
                         </li>
                     </ol>
+                    <?php if(isset($results))  echo $results; ?>
                     <button type="submit" name="action" class="registerbtn" value="listauthors">List Authors</button>
                     <button type="submit" name="action" class="registerbtn" value="addauthor">Add Author</button>
                     <button type="submit" name="action" class="registerbtn" value="delauthor">Delete Author</button>
                 </form>
+                
             </main>
             <footer>
                 <?php include "common/footer.php";?>

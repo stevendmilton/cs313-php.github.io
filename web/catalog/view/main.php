@@ -10,6 +10,7 @@
 </head>
 
  <body>
+     <div id="mainContent">
     <header>
         <h1>Library Resources</h1>
     </header>
@@ -25,20 +26,23 @@
             }
         ?>
         <form action="index.php" method="post">
-            <label for="srcTitle">Title:&#9;</label>
-            <input type="text" name="srcTitle" id="srcTitle"><br>
-            <label for="srcAuthor">Author&#9;</label>
-            <input type="text" name="srcAuthor" id="srcAuthor"><br>
+            <legend>Enter Search Criteria (partial matches allowed)</legend>
+            <ol>
+                <li>
+                    <label for="srcTitle">Title:</label>
+                    <input type="text" name="srcTitle" id="srcTitle">
+                </li>
+                <li>
+                    <label for="srcAuthor">Author:&#9;</label>
+                    <input type="text" name="srcAuthor" id="srcAuthor">
+                </li>
+            <?php if (isset($results)){ echo $results; } ?>
             <button type="submit" name='action' class='registerbtn' value="find">Search</button>
         </form>
-        <?php 
-            if (isset($results)){
-                echo $results; 
-            }
-        ?>
     </main>
     <footer>
         <?php include "common/footer.php";?>  
     </footer>
+    </div>
  </body>
 </html>

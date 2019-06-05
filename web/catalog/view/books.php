@@ -29,15 +29,16 @@
                     <legend>Enter Book Information</legend>
                     <ol>
                         <li>
-                            <label for="bookTitle" class="invlabel" >Title</label>
+                            <label for="bookTitle" class="invlabel" >Title:</label>
                             <input type="text" id="bookTitle" name="bookTitle" <?php if(isset($bookTitle)){echo "value='$bookTitle'";}  ?>>
                         </li>
                         <li>
-                            <label for="bookAuthor" class="invlabel">Author</label>
+                            <label for="bookAuthor" class="invlabel">Author:</label>
+                            <!--<?php echo $authorList; ?>-->
                             <input type="text" id="bookAuthor" name="bookAuthor" <?php if(isset($bookAuthor)){echo "value='$bookAuthor'";}  ?>>
                         </li>
                         <li>
-                            <label for="bookDesc" class="invlabel">Description</label>
+                            <label for="bookDesc" class="invlabel">Description:</label>
                             <textarea id="bookDesc" name="bookDesc" rows = "4" cols = "40"><?php if(isset($bookDesc)){echo $bookDesc;}?></textarea>
                         </li>
                     </ol>

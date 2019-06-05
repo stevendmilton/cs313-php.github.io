@@ -116,8 +116,8 @@ switch ($action){
         include 'view/authors.php';
         break;
     case 'books':
-        //$authors = listAuthors();
-        //$authorList = buildAuthorDropDown($authors);
+        $authors = listAuthors();
+        $authorList = buildAuthorDropDown($authors);
         include 'view/books.php';
         break;
     case 'addbook':
