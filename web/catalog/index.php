@@ -179,6 +179,7 @@ switch ($action){
             exit;
         }
         $bookId = $found[0]['bookId'];
+        if(empty($bookId)) {$bookId = $found[0]['bookid'];}
         $delOutcome = deletebook($bookId);
         if($delOutcome === 1){
             $_SESSION['message'] = "$bookTitle has successfully been deleted";        
