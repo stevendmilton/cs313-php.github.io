@@ -1,7 +1,12 @@
 const ejs = require("ejs").__express;
+const http = require("http");
 const express = require('express');
 const app = express();
+const cookie = require("cookie");
+const cookieParser = require('cookie-parser');
 var path = require('path');
+
+app.use(cookieParser());
 app.engine('.ejs', ejs);
 
 app.set("views", path.join(__dirname,"views"));
@@ -19,17 +24,18 @@ const connectionString = process.env.DATABASE_URL;
 const pool = new Pool({connectionString: connectionString});
 
 
-app.set('port', process.env.PORT);
-app.use(express.static(__dirname + 'public'));
+app.set('port', process.env.PORT || 5000);
+app.use(express.static(__dirname + '/public'));
 
 app.get("/", (req, res) => res.render('pages/home'));
 app.get("/login", (req, res) => res.render('pages/login'));
 app.get('/validlogin', login);
-//app.get('/user', userMaint);
-//app.get('/member', mbrMaint);
-//app.get('/organization', orgMaint);
-//app.get('/position', posMaint);
-//app.get('/calling', submitCalling);
+app.get("/user", (req, res) => res.render('pages/userMaint'));
+app.get("/position", (req, res) => res.render('pages/posMaint'));
+app.get("/organization", (req, res) => res.render('pages/orgMaint'));
+app.post("/addorg", insertOrg);
+app.get("/member", (req, res) => res.render('pages/mbrMaint'));
+app.get('/calling', (req, res) => res.render('pages/submitCalling'));
 
 // Start the server running
 app.listen(app.get('port'), function() {
@@ -43,13 +49,16 @@ function login(request, response) {
   var password = request.query.password;
 
   validateLogin(username,password, function(error, result) {
+    console.log('error: ' + error);
+    console.log('result: ' + result);
+    console.log('result.length: ' + result.length);
     if (error || result == null || result.length != 1) {
       console.log('Error validating user');
       response.render('pages/loginfail');
     } else {
       console.log("User " + username + " successfully logged in.");
-      userAccess = result[1];
-      userId = result[0];
+      var userAccess = result.useraccessrights;
+      var userId = result.userid;
       console.log(userAccess);
       console.log(userId);
       var parameters = {uname: username};
@@ -80,7 +89,7 @@ function validateLogin(username,password, callback) {
     }
 
     // Log this to the console for debugging purposes.
-    if (result.length > 0)
+    if (result.length == 1)
       console.log("Valid user found");
     else
       console.log('User not found');
@@ -95,3 +104,47 @@ function validateLogin(username,password, callback) {
   });
 
 }
+
+function insertOrg (request, response) {
+  var organization = request.query.organization;
+  console.log("Inserting organization: " + organization);
+
+  // Set up the SQL that we will use for our query. Note that we can make
+  // use of parameter placeholders just like with PHP's PDO.
+  var sql = "INSERT INTO organizations (orgname) values ( $1)";
+
+  // We now set up an array of all the parameters we will pass to fill the
+  // placeholder spots we left in the query.
+  var params = [organization];
+
+  // This runs the query, and then calls the provided anonymous callback function
+  // with the results.
+  pool.query(sql, params, (err,res)=> {
+    // If an error occurred...
+    if (err) {
+      console.log("Error in query: ")
+      console.log(err);
+      pool.end();
+    }
+
+    // Log this to the console for debugging purposes.
+    console.log(res);
+    var insresult;
+    if (1 == 1) {
+      console.log("Organization " + organization + " successfully added.");
+      insresult = 'Y';
+    } else {
+      console.log("Organization " + organization + " insert failed");
+      insresult = "N";
+    }
+
+
+    // When someone else called this function, they supplied the function
+    // they wanted called when we were all done. Call that function now
+    // and pass it the results.
+
+    // (The first parameter is the error variable, so we will pass null.)
+    pool.end()
+  });
+}
+
